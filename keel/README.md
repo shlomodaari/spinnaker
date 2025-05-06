@@ -8,7 +8,7 @@ Continue reading for technical architecture, or check out our [FAQ section](FAQ.
 # Keel Architecture
 
 This document describes the architecture of Spinnaker’s Keel service, which is responsible for the bulk of the functionality behind Managed Delivery.
-
+sdf
 ## Terminology
 
 ### Resources
