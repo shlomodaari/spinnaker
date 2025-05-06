@@ -2,7 +2,7 @@ Orcatest
 ====
 [![Build Status](https://api.travis-ci.org/spinnaker/orca.svg?branch=master)](https://travis-ci.org/spinnaker/orca)
 
-![Orca Logo](logo.jpg?raw=true)
+![Orca Logo](logo.jpg?raw=true)sdf
 
 Orca is the orchestration engine for Spinnaker.tre
 It is responsible for taking an execution definition and managing the stages and tasks, coordinating the other Spinnaker services.
