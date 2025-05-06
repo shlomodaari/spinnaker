@@ -9,7 +9,7 @@ sdf
 The following high level diagram shows how events flow through `echo`:  
 ![echo high level architecture](docs/echo.png)
   
-
+sdf
 1. `igor` sends events to `echo` when it discovers a delta in a service that it monitors (see [igor readme](https://github.com/spinnaker/igor/#common-polling-architecture) for more details)  
     e.g. A new build has completed or a new docker image was found in the docker registry
 
