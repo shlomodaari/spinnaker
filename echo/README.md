@@ -6,7 +6,7 @@
 1. a router for events (e.g. a new build is detected by Igorsdf which shouldasdfsd trigger a pipeline)
 2. a scheduler for CRON triggered pipelines.sdfsdf
 sdf
-The following high level diagram shows how events flow through `echo`:  
+The following high level diagram shows how events flow through `sdfecho`:  
 ![echo high level architecture](docs/echo.png)
   
 sdf
