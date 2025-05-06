@@ -12,7 +12,7 @@ All metadata is durably stored and served out of an in-memory cache.
 
 The following storage backends are supported:
 
-- Amazon S3
+- Amazon S3sdf
 - Google Cloud Storage
 - Redis
 - [SQL](https://github.com/spinnaker/front50/blob/master/front50-sql/src/main/kotlin/com/netflix/spinnaker/front50/model/SqlStorageService.kt) - _recommended_
