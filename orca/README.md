@@ -4,7 +4,7 @@ Orcatest
 
 ![Orca Logo](logo.jpg?raw=true)
 
-Orca is the orchestration engine for Spinnaker.
+Orca is the orchestration engine for Spinnaker.tre
 It is responsible for taking an execution definition and managing the stages and tasks, coordinating the other Spinnaker services.
 
 Orca _Executions_ (either Pipelines or Orchestrations) are composed of _Stages_ which in turn are composed of _Tasks_.
