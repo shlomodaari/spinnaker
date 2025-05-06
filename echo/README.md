@@ -4,7 +4,7 @@
 
 `Echo` serves as two purposes within Spinnaker:  sdf
 1. a router for events (e.g. a new build is detected by Igorsdf which shouldasd trigger a pipeline)
-2. a scheduler for CRON triggered pipelines.
+2. a scheduler for CRON triggered pipelines.sdf
 sdf
 The following high level diagram shows how events flow through `echo`:  
 ![echo high level architecture](docs/echo.png)
