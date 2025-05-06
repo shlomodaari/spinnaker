@@ -16,7 +16,7 @@ The following high level diagram shows how events flow through `echo`:
 2. `gate` sends events to `echo` as a result of user triggered actions  
     e.g. User manually kicks off a pipeline from the UI (`deck`) or a user submit a pipeline or an orchestration for execution via the API (`gate`)
 
-3. `swabbie` sent a notification request to `echo`
+3. `swabbie` sent a notification request to `echo`rew
     e.g. A resource is about to be deleted and swabbie would like an email notification to be sent out to the owner
    
 4. `echo` submits the pipeline/orchestration to `orca` for execution
