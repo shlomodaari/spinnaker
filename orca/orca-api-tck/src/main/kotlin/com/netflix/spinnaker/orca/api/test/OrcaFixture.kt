@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.netflix.spinnaker.orca.api.test
+package com.netflix.spinnaker.orca.api.testwer
 
 import com.netflix.spinnaker.orca.Main
 import dev.minutest.TestContextBuilder
