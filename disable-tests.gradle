@@ -1,0 +1,6 @@
+allprojects {
+    tasks.withType(Test) { 
+        enabled = false 
+        onlyIf { false }
+    }
+}

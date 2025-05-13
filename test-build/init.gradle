@@ -1,0 +1,109 @@
+import org.jfrog.gradle.plugin.artifactory.ArtifactoryPlugin
+import org.jfrog.gradle.plugin.artifactory.task.ArtifactoryTask
+
+// Usually if you're building and writing to JFrog, you can
+// run `jfrog rt gradle ...` without configuring the Artifactory
+// Gradle plugin. Unfortunately this command will skip
+// Gradle platforms (e.g., `orca-bom`), which is why
+// we need this init script.
+
+initscript {
+  repositories {
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.24.21')
+  }
+}
+
+class BuildInfoPluginListener extends BuildAdapter {
+
+  void projectsLoaded(Gradle gradle) {
+    def root = gradle.getRootProject()
+
+    def properties = gradle.startParameter.projectProperties
+    def service = properties.get("service")
+    def artifactoryUrl = properties.get("artifactoryUrl")
+    def artifactoryRepo = properties.get("artifactoryRepo")
+    def artifactoryBuildName = properties.get("artifactoryBuildName")
+    def artifactoryBuildNumber = properties.get("artifactoryBuildNumber")
+    def artifactoryUsername = properties.get("artifactoryUsername")
+    def artifactoryPassword = properties.get("artifactoryPassword")
+
+    if (root.name != "buildSrc") {
+      root.allprojects {
+        apply plugin: 'maven-publish'
+        apply plugin: ArtifactoryPlugin
+
+        project.plugins.withType(JavaPlatformPlugin) {
+          if (group.toString().startsWith("com.netflix")) {
+            def baseGroup = group.toString().substring(11)
+            group = (baseGroup.startsWith(".spinnaker")) ? "io" + baseGroup : "io.spinnaker" + baseGroup
+          }
+          publishing {
+            publications {
+              mavenJava(MavenPublication) {
+                from components.javaPlatform
+              }
+            }
+          }
+        }
+        project.plugins.withType(JavaLibraryPlugin) {
+          if (group.toString().startsWith("com.netflix")) {
+            def baseGroup = group.toString().substring(11)
+            group = (baseGroup.startsWith(".spinnaker")) ? "io" + baseGroup : "io.spinnaker" + baseGroup
+          }
+          publishing {
+            publications {
+              mavenJava(MavenPublication) {
+                from components.java
+              }
+            }
+          }
+        }
+
+        artifactory {
+          contextUrl = artifactoryUrl
+          clientConfig.info.setBuildName(artifactoryBuildName)
+          clientConfig.info.setBuildNumber(artifactoryBuildNumber)
+
+          publish {
+            repository {
+              repoKey = artifactoryRepo
+              maven = true
+              username = artifactoryUsername
+              password = artifactoryPassword
+            }
+            defaults {
+              publications("mavenJava")
+              publishArtifacts = true
+              publishPom = true
+            }
+          }
+          clientConfig.info.setBuildStarted(System.currentTimeMillis())
+        }
+
+        tasks.findByName(ArtifactoryTask.ARTIFACTORY_PUBLISH_TASK_NAME).each {
+          it.setCiServerBuild()
+        }
+
+        tasks.withType(GenerateModuleMetadata).configureEach {
+          // the enforced-platform flag is applicable only for master
+          // we need to check this before apply it
+          if (
+                  !project.version.toString().endsWith("release-1.31.x") &&
+                  !project.version.toString().endsWith("release-1.30.x") &&
+                  !project.version.toString().endsWith("release-1.29.x") &&
+                  !project.version.toString().endsWith("release-1.28.x") &&
+                  !project.version.toString().endsWith("release-1.27.x")
+          ) {
+            suppressedValidationErrors.add('enforced-platform')
+          }
+        }
+      }
+    }
+  }
+}
+
+addListener(new BuildInfoPluginListener())
+

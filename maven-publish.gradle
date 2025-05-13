@@ -1,0 +1,16 @@
+allprojects {
+    apply plugin: 'maven-publish'
+    
+    if (project.hasProperty('mavenPublishEnabled') && project.mavenPublishEnabled.toBoolean()) {
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    from components.java
+                    if (tasks.findByName('sourcesJar')) {
+                        artifact sourcesJar
+                    }
+                }
+            }
+        }
+    }
+}

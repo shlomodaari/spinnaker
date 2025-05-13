@@ -1,7 +1,7 @@
 package com.netflix.spinnaker.clouddriver.aws.userdata;
 
 /**
- * Implementations of this interface will provide user data to instances during the deployment
+ * Implementations of this interdsface will provide user data to instances during the deployment
  * process.
  */
 public interface UserDataProvider {
