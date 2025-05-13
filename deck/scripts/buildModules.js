@@ -1,5 +1,5 @@
 #!/usr/bin/env node 
-#TESTd
+#TESTdasd
 
 const path = require('path');
 const util = require('util');
