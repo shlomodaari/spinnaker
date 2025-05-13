@@ -1,4 +1,5 @@
-#!/usr/bin/env node
+#!/usr/bin/env node 
+#TEST
 
 const path = require('path');
 const util = require('util');
