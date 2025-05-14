@@ -4,7 +4,8 @@ Spinnaker Cloud Provider Service
 
 This service is the main integration point for Spinnaker cloud providers like AWS, GCE, CloudFoundry, Azure etc.
 
-### Developing with Intellij
+### Developing with Intellijfds
+
 
 To configure this repo as an Intellij project, run `./gradlew idea` in the root directory.
 
